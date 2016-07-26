@@ -70,7 +70,7 @@ class MetadataServiceAPI(object):
         }
 
     @staticmethod
-    def build_partition_metadata_record(subsite, node, sensor, method, stream, bin, store, first, last, count):
+    def build_partition_metadata_record(subsite, node, sensor, method, stream, bin_, store, first, last, count):
         return {
             '@class': '.PartitionMetadataRecord',
             'referenceDesignator': {
@@ -80,7 +80,7 @@ class MetadataServiceAPI(object):
             },
             'method': str(method),
             'stream': str(stream),
-            'bin': long(bin),
+            'bin': long(bin_),
             'store': str(store),
             'first': float(first),
             'last': float(last),
@@ -121,8 +121,8 @@ class MetadataServiceAPI(object):
             url = '/'.join((self.__partition_url, 'inv', subsite, node, sensor))
         return self.__get_json(url)
 
-    def get_partition_metadata_record(self, subsite, node, sensor, method, stream, bin, store):
-        url = '/'.join((self.__partition_url, 'inv', subsite, node, sensor, method, stream, str(bin), store))
+    def get_partition_metadata_record(self, subsite, node, sensor, method, stream, bin_, store):
+        url = '/'.join((self.__partition_url, 'inv', subsite, node, sensor, method, stream, str(bin_), store))
         try:
             return self.__get_json(url)
         except MetadataServiceException, e:
@@ -133,8 +133,8 @@ class MetadataServiceAPI(object):
     def create_partition_metadata_record(self, partition_metadata_record):
         return self.__post_json(self.__partition_url, partition_metadata_record)
 
-    def update_partition_metadata_record(self, record_id, partition_metadata_record):
-        url = '/'.join((self.__partition_url, str(record_id)))
+    def index_partition_metadata_record(self, partition_metadata_record):
+        url = '/'.join((self.__partition_url, 'index'))
         return self.__put_json(url, partition_metadata_record)
 
     def delete_partition_metadata_records(self, subsite, node, sensor):
