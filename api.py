@@ -70,7 +70,7 @@ class MetadataServiceAPI(object):
         }
 
     @staticmethod
-    def build_partition_metadata_record(subsite, node, sensor, method, stream, bin_, store, first, last, count):
+    def build_partition_metadata_record(subsite, node, sensor, method, stream, bin, store, first, last, count):
         return {
             '@class': '.PartitionMetadataRecord',
             'referenceDesignator': {
@@ -80,7 +80,7 @@ class MetadataServiceAPI(object):
             },
             'method': str(method),
             'stream': str(stream),
-            'bin': long(bin_),
+            'bin': long(bin),
             'store': str(store),
             'first': float(first),
             'last': float(last),
@@ -121,8 +121,8 @@ class MetadataServiceAPI(object):
             url = '/'.join((self.__partition_url, 'inv', subsite, node, sensor))
         return self.__get_json(url)
 
-    def get_partition_metadata_record(self, subsite, node, sensor, method, stream, bin_, store):
-        url = '/'.join((self.__partition_url, 'inv', subsite, node, sensor, method, stream, str(bin_), store))
+    def get_partition_metadata_record(self, subsite, node, sensor, method, stream, bin, store):
+        url = '/'.join((self.__partition_url, 'inv', subsite, node, sensor, method, stream, str(bin), store))
         try:
             return self.__get_json(url)
         except MetadataServiceException, e:

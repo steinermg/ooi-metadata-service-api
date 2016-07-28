@@ -56,7 +56,7 @@ class MetadataServiceTest(unittest.TestCase):
         self.stream_metadata_responses.append(response)
         return sk, rec, response
 
-    def __partition_test_setup(self, bin_, store, first, last, count, subsite_suffix='', node_suffix='',
+    def __partition_test_setup(self, bin, store, first, last, count, subsite_suffix='', node_suffix='',
                                sensor_suffix='', method_suffix='', stream_suffix=''):
         sk = self.__build_knockoff_stream_key()
         sk = list(sk)
@@ -66,7 +66,7 @@ class MetadataServiceTest(unittest.TestCase):
         sk[3] += str(method_suffix)
         sk[4] += str(stream_suffix)
         sk = tuple(sk)
-        rec = metadata_service_api.build_partition_metadata_record(*(sk + (bin_, store, first, last, count)))
+        rec = metadata_service_api.build_partition_metadata_record(*(sk + (bin, store, first, last, count)))
         response = metadata_service_api._MetadataServiceAPI__post_json(PARTITION_METADATA_SERVICE_URL, rec)
         self.partition_metadata_responses.append(response)
         return sk, rec, response
@@ -216,8 +216,8 @@ class MetadataServiceTest(unittest.TestCase):
         recList.append(self.__partition_test_setup(1, 'test_store', 1.1, 2.2, 3, stream_suffix='0')[1])
 
         # 5 good ones
-        for bin_ in range(5):
-            _, rec, _ = self.__partition_test_setup(bin_, 'test_store', 1.1, 2.2, 3)
+        for bin in range(5):
+            _, rec, _ = self.__partition_test_setup(bin, 'test_store', 1.1, 2.2, 3)
             recList.append(rec)
 
         ref_des = self.__build_knockoff_stream_key()[0:3]
@@ -249,8 +249,8 @@ class MetadataServiceTest(unittest.TestCase):
         recList = []
 
         # 5 good ones
-        for bin_ in range(5):
-            _, rec, _ = self.__partition_test_setup(bin_, 'test_store', 1.1, 2.2, 3)
+        for bin in range(5):
+            _, rec, _ = self.__partition_test_setup(bin, 'test_store', 1.1, 2.2, 3)
             recList.append(rec)
 
         sk = self.__build_knockoff_stream_key()
