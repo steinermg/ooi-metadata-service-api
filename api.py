@@ -106,6 +106,10 @@ class MetadataServiceAPI(object):
     def create_stream_metadata_record(self, stream_metadata_record):
         return self.__post_json(self.__stream_url, stream_metadata_record)
 
+    def index_stream_metadata_record(self, stream_metadata_record):
+        url = '/'.join((self.__stream_url, 'index'))
+        return self.__put_json(url, stream_metadata_record)
+
     def delete_stream_metadata_records(self, subsite, node, sensor):
         url = '/'.join((self.__stream_url, 'inv', subsite, node, sensor))
         return self.__delete_json(url)
