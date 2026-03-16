@@ -131,8 +131,8 @@ class MetadataServiceTest(unittest.TestCase):
         # Test #
         ########
         actual_result = metadata_service_api.create_stream_metadata_record(rec)
-        self.assertIn(('message', 'Element created successfully.'), actual_result.items())
-        self.assertIn(('statusCode', 'CREATED'), actual_result.items())
+        self.assertIn(('message', 'Element created successfully.'), list(actual_result.items()))
+        self.assertIn(('statusCode', 'CREATED'), list(actual_result.items()))
         self.assertIn('id', actual_result)
         self.assertIsInstance(actual_result['id'], int)
         ###########
@@ -302,8 +302,8 @@ class MetadataServiceTest(unittest.TestCase):
         # Test #
         ########
         actual_result = metadata_service_api.create_partition_metadata_record(rec)
-        self.assertIn(('message', 'Element created successfully.'), actual_result.items())
-        self.assertIn(('statusCode', 'CREATED'), actual_result.items())
+        self.assertIn(('message', 'Element created successfully.'), list(actual_result.items()))
+        self.assertIn(('statusCode', 'CREATED'), list(actual_result.items()))
         self.assertIn('id', actual_result)
         self.assertIsInstance(actual_result['id'], int)
         ###########
@@ -322,8 +322,8 @@ class MetadataServiceTest(unittest.TestCase):
         # Test #
         ########
         actual_result = metadata_service_api.index_partition_metadata_record(rec)
-        self.assertIn(('message', 'Element indexed successfully.'), actual_result.items())
-        self.assertIn(('statusCode', 'OK'), actual_result.items())
+        self.assertIn(('message', 'Element indexed successfully.'), list(actual_result.items()))
+        self.assertIn(('statusCode', 'OK'), list(actual_result.items()))
         self.assertIn('id', actual_result)
         self.assertIsInstance(actual_result['id'], int)
         ###########

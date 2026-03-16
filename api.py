@@ -66,7 +66,7 @@ class MetadataServiceAPI(object):
             'stream': str(stream),
             'first': float(first),
             'last': float(last),
-            'count': long(count)
+            'count': int(count)
         }
 
     @staticmethod
@@ -80,11 +80,11 @@ class MetadataServiceAPI(object):
             },
             'method': str(method),
             'stream': str(stream),
-            'bin': long(bin),
+            'bin': int(bin),
             'store': str(store),
             'first': float(first),
             'last': float(last),
-            'count': long(count)
+            'count': int(count)
         }
 
     ##################################
@@ -98,7 +98,7 @@ class MetadataServiceAPI(object):
         url = '/'.join((self.__stream_url, 'inv', subsite, node, sensor, method, stream))
         try:
             return self.__get_json(url)
-        except MetadataServiceException, e:
+        except MetadataServiceException as e:
             if (e.status_code == requests.codes.not_found):
                 return None
             raise e
@@ -118,7 +118,7 @@ class MetadataServiceAPI(object):
         url = '/'.join((self.__stream_url, 'inv', subsite, node, sensor, method, stream))
         try:
             return self.__delete_json(url)
-        except MetadataServiceException, e:
+        except MetadataServiceException as e:
             if (e.status_code == requests.codes.not_found):
                 return None
             raise e
@@ -138,7 +138,7 @@ class MetadataServiceAPI(object):
         url = '/'.join((self.__partition_url, 'inv', subsite, node, sensor, method, stream, str(bin), store))
         try:
             return self.__get_json(url)
-        except MetadataServiceException, e:
+        except MetadataServiceException as e:
             if (e.status_code == requests.codes.not_found):
                 return None
             raise e
@@ -158,7 +158,7 @@ class MetadataServiceAPI(object):
         url = '/'.join((self.__partition_url, 'inv', subsite, node, sensor, method, stream, str(bin), store))
         try:
             return self.__delete_json(url)
-        except MetadataServiceException, e:
+        except MetadataServiceException as e:
             if (e.status_code == requests.codes.not_found):
                 return None
             raise e
